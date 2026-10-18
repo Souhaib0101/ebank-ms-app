@@ -2,9 +2,11 @@ package net.montaki.customerservice.service;
 
 import net.montaki.customerservice.entities.Customer;
 import net.montaki.customerservice.repository.CustomerRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class CustomerService {
 
     private CustomerRepository customerRepository;
