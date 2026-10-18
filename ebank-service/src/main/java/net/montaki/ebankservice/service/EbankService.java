@@ -4,7 +4,9 @@ import net.montaki.ebankservice.entities.BankAccount;
 import net.montaki.ebankservice.repository.BankAccountRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class EbankService {
@@ -24,6 +26,8 @@ public class EbankService {
     }
 
     public BankAccount save(BankAccount bankAccount) {
-            return bankAccountRepository.save(bankAccount);
+        bankAccount.setId(UUID.randomUUID().toString());
+        bankAccount.setCreatedAt(new Date());
+        return bankAccountRepository.save(bankAccount);
     }
 }
