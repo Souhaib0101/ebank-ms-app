@@ -63,7 +63,6 @@
 		</dependency>
 
 		<!-- Configuration server client (optional) -->
-		<!-- Configuration server client (optional) -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
