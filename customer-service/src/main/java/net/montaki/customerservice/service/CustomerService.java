@@ -2,8 +2,8 @@ package net.montaki.customerservice.service;
 
 import net.montaki.customerservice.entities.Customer;
 import net.montaki.customerservice.repository.CustomerRepository;
-import org.springframework.ai.mcp.annotation.McpTool;
-import org.springframework.ai.mcp.annotation.McpToolParam;
+import org.springaicommunity.mcp.annotation.McpTool;
+import org.springaicommunity.mcp.annotation.McpToolParam;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
