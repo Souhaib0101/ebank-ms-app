@@ -3,6 +3,7 @@ package net.montaki.ebankservice.service;
 import net.montaki.ebankservice.entities.BankAccount;
 import net.montaki.ebankservice.model.Customer;
 import net.montaki.ebankservice.repository.BankAccountRepository;
+import org.springframework.ai.mcp.annotation.McpTool;
 import org.springframework.ai.mcp.annotation.McpToolParam;
 import org.springframework.stereotype.Service;
 import net.montaki.ebankservice.feign.CustomerRestClient;

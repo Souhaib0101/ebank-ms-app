@@ -27,5 +27,4 @@ public class EbankAIAgent {
     public String chat(Prompt prompt) {
         return chatClient.prompt(prompt).call().content();
     }
-
 }

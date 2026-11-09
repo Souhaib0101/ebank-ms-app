@@ -1,8 +1,29 @@
 package net.montaki.ebankbot.telegram;
 
-import jakarta.annotation.PostConstruct;
 import net.montaki.ebankbot.agents.EbankAIAgent;
+import jakarta.annotation.PostConstruct;
+import org.springframework.ai.chat.messages.UserMessage;
+import org.springframework.ai.chat.prompt.Prompt;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Component;
+import org.springframework.util.MimeTypeUtils;
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
+import org.telegram.telegrambots.meta.TelegramBotsApi;
+import org.telegram.telegrambots.meta.api.methods.ActionType;
+import org.telegram.telegrambots.meta.api.methods.GetFile;
+import org.telegram.telegrambots.meta.api.methods.send.SendChatAction;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.File;
+import org.telegram.telegrambots.meta.api.objects.PhotoSize;
+import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
+import org.springframework.ai.content.Media;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Component
 public class TelegramBot extends TelegramLongPollingBot {
@@ -56,7 +77,7 @@ public class TelegramBot extends TelegramLongPollingBot {
             String query = messageText != null?messageText:caption;
             UserMessage userMessage = UserMessage.builder()
                     .text(query)
-                    .media(mediaList)
+                    .media((org.springframework.ai.content.Media) mediaList)
                     .build();
             sendTypingQuestion(chatId);
             String answer = aiAgent.chat(new Prompt(userMessage));
@@ -64,9 +85,8 @@ public class TelegramBot extends TelegramLongPollingBot {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-
-
     }
+
     @Override
     public String getBotUsername() { return "ENSETAIBot"; }
 
