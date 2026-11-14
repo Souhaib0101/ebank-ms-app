@@ -3,9 +3,18 @@
     <h1>Clients</h1>
     <p>Retrouvez les clients de votre banque.</p>
   </div>
-  <button class="btn btn-outline-secondary" (click)="reload()" aria-label="Actualiser les clients">
-    <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
-  </button>
+  <div class="d-flex gap-2">
+    <button
+      class="btn btn-outline-secondary"
+      (click)="reload()"
+      aria-label="Actualiser les clients"
+    >
+      <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+    </button>
+    <a class="btn btn-primary" routerLink="/customers/new"
+      ><i class="bi bi-person-plus me-2" aria-hidden="true"></i>Nouveau client</a
+    >
+  </div>
 </header>
 @if (state$ | async; as state) {
   @if (state.status === status.Error) {
@@ -39,7 +48,9 @@
               </tr>
             } @empty {
               <tr>
-                <td colspan="3" class="text-center text-secondary py-5">Aucun client.</td>
+                <td colspan="3" class="text-center text-secondary py-5">
+                  Aucun client. Ajoutez votre premier client.
+                </td>
               </tr>
             }
           </tbody>

@@ -56,3 +56,7 @@ main {
   font-family: monospace;
   font-size: 0.8rem;
 }
+.form-panel {
+  max-width: 640px;
+  margin-inline: auto;
+}

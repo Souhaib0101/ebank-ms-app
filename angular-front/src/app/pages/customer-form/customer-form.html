@@ -1,0 +1,59 @@
+<section class="form-panel">
+  <header class="page-heading">
+    <div>
+      <h1>Nouveau client</h1>
+      <p>Ajoutez un client pour lui ouvrir un compte.</p>
+    </div>
+  </header>
+  @if (failure()) {
+    <div class="alert alert-danger" role="alert">{{ failure() }}</div>
+  }
+  <div class="card">
+    <div class="card-body p-4">
+      <form (submit)="save($event)" novalidate>
+        <fieldset [disabled]="saving()">
+          <div class="mb-3">
+            <label class="form-label" for="customerName">Nom complet</label>
+            <input
+              class="form-control"
+              id="customerName"
+              type="text"
+              autocomplete="name"
+              [formField]="customerForm.name"
+              aria-describedby="name-errors"
+            />
+            <div id="name-errors" class="text-danger small">
+              @if (customerForm.name().touched() || submitted()) {
+                @for (error of customerForm.name().errors(); track $index) {
+                  <div>{{ error.message }}</div>
+                }
+              }
+            </div>
+          </div>
+          <div class="mb-4">
+            <label class="form-label" for="customerEmail">Adresse e-mail</label>
+            <input
+              class="form-control"
+              id="customerEmail"
+              type="email"
+              autocomplete="email"
+              [formField]="customerForm.email"
+              aria-describedby="email-errors"
+            />
+            <div id="email-errors" class="text-danger small">
+              @if (customerForm.email().touched() || submitted()) {
+                @for (error of customerForm.email().errors(); track $index) {
+                  <div>{{ error.message }}</div>
+                }
+              }
+            </div>
+          </div>
+          <button class="btn btn-primary" type="submit" [disabled]="saving()">
+            {{ saving() ? 'Enregistrement…' : 'Créer le client' }}
+          </button>
+          <a class="btn btn-outline-secondary ms-2" routerLink="/customers">Annuler</a>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</section>
