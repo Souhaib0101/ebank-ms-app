@@ -60,3 +60,29 @@ main {
   max-width: 640px;
   margin-inline: auto;
 }
+.markdown-body {
+  overflow-wrap: anywhere;
+  overflow-x: auto;
+}
+.markdown-body table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-block: 1rem;
+}
+.markdown-body th,
+.markdown-body td {
+  border: 1px solid #dce2eb;
+  padding: 0.6rem;
+}
+.markdown-body th {
+  background: #f4f6fa;
+}
+.markdown-body pre {
+  background: #f4f6fa;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+.markdown-body > :last-child {
+  margin-bottom: 0;
+}

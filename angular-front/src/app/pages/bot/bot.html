@@ -43,11 +43,7 @@
           prépare sa réponse…
         </p>
       } @else if (response.content) {
-        <div
-          class="chat-response text-break"
-          style="white-space: pre-wrap"
-          [textContent]="response.content"
-        ></div>
+        <markdown class="markdown-body" [data]="response.content" />
       } @else {
         <p class="text-secondary mb-0">
           L'assistant a renvoyé une réponse vide. Reformulez votre question.

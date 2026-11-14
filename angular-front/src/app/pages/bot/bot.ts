@@ -1,13 +1,14 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MarkdownComponent } from 'ngx-markdown';
 import { finalize, Observable } from 'rxjs';
 import { ChatState } from '../../models/chat.model';
 import { BotService } from '../../services/bot.service';
 
 @Component({
   selector: 'app-bot',
-  imports: [AsyncPipe, FormsModule],
+  imports: [AsyncPipe, FormsModule, MarkdownComponent],
   templateUrl: './bot.html',
 })
 export class Bot {
