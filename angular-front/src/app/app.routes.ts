@@ -31,8 +31,7 @@ export const routes: Routes = [
   },
   {
     path: 'customers',
-    component: SectionPlaceholder,
-    data: { title: 'Clients', description: 'Retrouvez les clients de votre banque.' },
+    loadComponent: () => import('./pages/customers/customers').then((m) => m.Customers),
   },
   {
     path: 'bot',
