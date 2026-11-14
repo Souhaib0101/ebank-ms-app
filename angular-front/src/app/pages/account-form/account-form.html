@@ -1,0 +1,101 @@
+<section class="form-panel">
+  <header class="page-heading">
+    <div>
+      <h1>Nouveau compte</h1>
+      <p>Renseignez le solde initial, le type et le titulaire.</p>
+    </div>
+  </header>
+  @if (failure()) {
+    <div class="alert alert-danger" role="alert">{{ failure() }}</div>
+  }
+  <div class="card">
+    <div class="card-body p-4">
+      <form (submit)="save($event)" novalidate>
+        <fieldset [disabled]="saving()">
+          <div class="mb-3">
+            <label class="form-label" for="balance">Solde initial</label>
+            <input
+              class="form-control"
+              id="balance"
+              type="number"
+              step="0.01"
+              [formField]="accountForm.balance"
+              aria-describedby="balance-errors"
+            />
+            <div id="balance-errors" class="text-danger small">
+              @if (accountForm.balance().touched() || submitted()) {
+                @for (error of accountForm.balance().errors(); track $index) {
+                  <div>{{ error.message }}</div>
+                }
+              }
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label" for="accountType">Type de compte</label>
+            <select
+              class="form-select"
+              id="accountType"
+              [formField]="accountForm.type"
+              aria-describedby="type-errors"
+            >
+              <option value="">Choisir un type</option>
+              <option value="CURRENT-ACCOUNT">Compte courant</option>
+              <option value="SAVING-ACCOUNT">Compte épargne</option>
+            </select>
+            <div id="type-errors" class="text-danger small">
+              @if (accountForm.type().touched() || submitted()) {
+                @for (error of accountForm.type().errors(); track $index) {
+                  <div>{{ error.message }}</div>
+                }
+              }
+            </div>
+          </div>
+          @if (customers$ | async; as state) {
+            @if (state.status === status.Success) {
+              <div class="mb-4">
+                <label class="form-label" for="customerId">Client titulaire</label>
+                <select
+                  class="form-select"
+                  id="customerId"
+                  [formField]="accountForm.customerId"
+                  aria-describedby="customer-errors"
+                >
+                  <option value="">Choisir un client</option>
+                  @for (customer of state.data; track customer.id) {
+                    <option [value]="customer.id">#{{ customer.id }} — {{ customer.name }}</option>
+                  }
+                </select>
+                <div id="customer-errors" class="text-danger small">
+                  @if (accountForm.customerId().touched() || submitted()) {
+                    @for (error of accountForm.customerId().errors(); track $index) {
+                      <div>{{ error.message }}</div>
+                    }
+                  }
+                </div>
+                @if (state.data.length === 0) {
+                  <p class="small mt-2">
+                    Ajoutez d'abord <a routerLink="/customers/new">un client</a>.
+                  </p>
+                }
+              </div>
+              <button
+                class="btn btn-primary"
+                type="submit"
+                [disabled]="saving() || state.data.length === 0"
+              >
+                {{ saving() ? 'Enregistrement…' : 'Créer le compte' }}
+              </button>
+            } @else if (state.status === status.Error) {
+              <div class="alert alert-danger" role="alert">
+                {{ state.errorMessage }} <a routerLink="/accounts">Retour aux comptes</a>
+              </div>
+            } @else {
+              <p role="status">Chargement des clients…</p>
+            }
+          }
+          <a class="btn btn-outline-secondary ms-2" routerLink="/accounts">Annuler</a>
+        </fieldset>
+      </form>
+    </div>
+  </div>
+</section>

@@ -26,6 +26,10 @@ class SectionPlaceholder {
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'accounts' },
   {
+    path: 'accounts/new',
+    loadComponent: () => import('./pages/account-form/account-form').then((m) => m.AccountForm),
+  },
+  {
     path: 'accounts',
     loadComponent: () => import('./pages/accounts/accounts').then((m) => m.Accounts),
   },
