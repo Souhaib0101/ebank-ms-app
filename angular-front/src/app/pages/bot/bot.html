@@ -8,6 +8,19 @@
 <div class="card mb-4">
   <div class="card-body p-4">
     <form (ngSubmit)="ask()">
+      <div class="d-flex flex-wrap gap-3 align-items-center mb-3">
+        <label for="chatMode" class="form-label mb-0">Mode de réponse</label>
+        <select
+          class="form-select w-auto"
+          id="chatMode"
+          name="mode"
+          [(ngModel)]="mode"
+          [disabled]="busy()"
+        >
+          <option value="stream">Streaming — au fil de la génération</option>
+          <option value="standard">Classique — réponse complète</option>
+        </select>
+      </div>
       <label class="form-label" for="query">Votre question</label>
       <div class="d-flex flex-wrap gap-2">
         <input
@@ -16,7 +29,7 @@
           name="query"
           [(ngModel)]="query"
           [disabled]="busy()"
-          placeholder="Liste les comptes du client 1"
+          placeholder="Liste les comptes du client 1 sous forme de tableau"
           required
         />
         <button class="btn btn-primary" type="submit" [disabled]="busy() || !query.trim()">
@@ -42,12 +55,15 @@
           <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>L'assistant
           prépare sa réponse…
         </p>
-      } @else if (response.content) {
-        <markdown class="markdown-body" [data]="response.content" />
       } @else {
-        <p class="text-secondary mb-0">
-          L'assistant a renvoyé une réponse vide. Reformulez votre question.
-        </p>
+        <markdown class="markdown-body" [data]="response.content" />
+        @if (!response.complete) {
+          <p class="small text-primary mt-3 mb-0" role="status">Réponse en cours…</p>
+        } @else if (!response.content) {
+          <p class="text-secondary mb-0">
+            L'assistant a renvoyé une réponse vide. Reformulez votre question.
+          </p>
+        }
       }
     </div>
   </section>
