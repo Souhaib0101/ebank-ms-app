@@ -5,7 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development"
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test --watch=false",
+    "format:check": "prettier --check src proxy.conf.json angular.json package.json"
   },
   "private": true,
   "packageManager": "npm@11.12.1",
@@ -29,6 +31,8 @@
     "@angular/cli": "^21.2.30",
     "@angular/compiler-cli": "^21.2.0",
     "prettier": "^3.8.1",
+    "jsdom": "^27.0.0",
+    "vitest": "^4.0.8",
     "typescript": "~5.9.2"
   }
 }
