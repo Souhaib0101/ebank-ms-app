@@ -43,6 +43,12 @@
   </div>
 </nav>
 <main class="container py-4 py-lg-5" id="main-content">
+  @if (loading.isLoading()) {
+    <div class="loading-indicator" role="status">
+      <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+      Chargement en cours…
+    </div>
+  }
   <router-outlet />
 </main>
 <footer class="container pb-4 text-secondary small">eBank · Spring Cloud & Angular 21</footer>
