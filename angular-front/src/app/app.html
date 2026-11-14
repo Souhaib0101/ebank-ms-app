@@ -1,4 +1,48 @@
-<main>
-  <h1>eBank</h1>
-  <p>Client Angular 21 des microservices bancaires.</p>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Navigation principale">
+  <div class="container">
+    <a class="navbar-brand fw-bold" routerLink="/accounts">
+      <i class="bi bi-bank me-2" aria-hidden="true"></i>eBank
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#mainNavigation"
+      aria-controls="mainNavigation"
+      aria-expanded="false"
+      aria-label="Ouvrir le menu"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNavigation">
+      <div class="navbar-nav ms-auto gap-md-3">
+        <a
+          class="nav-link"
+          routerLink="/accounts"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Comptes</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/customers"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >Clients</a
+        >
+        <a
+          class="nav-link"
+          routerLink="/bot"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+        >
+          <i class="bi bi-chat-dots me-1" aria-hidden="true"></i>Assistant
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+<main class="container py-4 py-lg-5" id="main-content">
+  <router-outlet />
 </main>
+<footer class="container pb-4 text-secondary small">eBank · Spring Cloud & Angular 21</footer>

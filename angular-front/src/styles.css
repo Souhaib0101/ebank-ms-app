@@ -1,1 +1,34 @@
-/* Styles globaux du client eBank. */
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  color-scheme: light;
+}
+body {
+  background: #f4f6fa;
+  color: #172b4d;
+}
+main {
+  min-height: calc(100vh - 120px);
+}
+.card {
+  border: 1px solid #e4e9f0;
+  box-shadow: 0 4px 18px #172b4d06;
+}
+.page-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.page-heading h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+.page-heading p {
+  margin: 0;
+  color: #607089;
+}
