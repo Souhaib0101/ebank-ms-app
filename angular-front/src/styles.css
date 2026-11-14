@@ -32,3 +32,14 @@ main {
   margin: 0;
   color: #607089;
 }
+.table th {
+  color: #607089;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+.account-id {
+  font-family: monospace;
+  font-size: 0.8rem;
+}

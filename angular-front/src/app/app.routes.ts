@@ -27,8 +27,7 @@ export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'accounts' },
   {
     path: 'accounts',
-    component: SectionPlaceholder,
-    data: { title: 'Comptes bancaires', description: 'Consultez les comptes et leurs soldes.' },
+    loadComponent: () => import('./pages/accounts/accounts').then((m) => m.Accounts),
   },
   {
     path: 'customers',

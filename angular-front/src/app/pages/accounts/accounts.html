@@ -1,0 +1,60 @@
+<header class="page-heading">
+  <div>
+    <h1>Comptes bancaires</h1>
+    <p>Consultez les comptes et leurs soldes.</p>
+  </div>
+  <button class="btn btn-outline-secondary" (click)="reload()" aria-label="Actualiser les comptes">
+    <i class="bi bi-arrow-clockwise" aria-hidden="true"></i>
+  </button>
+</header>
+@if (state$ | async; as state) {
+  @if (state.status === status.Error) {
+    <div class="alert alert-danger" role="alert">
+      {{ state.errorMessage }}
+      <button class="btn btn-sm btn-outline-danger ms-2" (click)="reload()">Réessayer</button>
+    </div>
+  } @else if (state.status === status.Success) {
+    <div class="card">
+      <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+          <caption class="px-3">
+            {{
+              state.data.length
+            }}
+            compte(s)
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Identifiant</th>
+              <th scope="col">Solde</th>
+              <th scope="col">Créé le</th>
+              <th scope="col">Type</th>
+              <th scope="col">Client</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (account of state.data; track account.id) {
+              <tr>
+                <td class="account-id">{{ account.id }}</td>
+                <td class="fw-semibold text-nowrap">{{ account.balance | number: '1.2-2' }}</td>
+                <td class="text-nowrap">{{ account.createdAt | date: 'dd/MM/yyyy HH:mm' }}</td>
+                <td>
+                  <span class="badge text-bg-light">{{ account.type }}</span>
+                </td>
+                <td>
+                  <a [routerLink]="['/customers']">#{{ account.customerId }}</a>
+                </td>
+              </tr>
+            } @empty {
+              <tr>
+                <td colspan="5" class="text-center text-secondary py-5">Aucun compte bancaire.</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  } @else {
+    <p class="text-secondary" role="status">Chargement des comptes…</p>
+  }
+}
