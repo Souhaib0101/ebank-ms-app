@@ -1,0 +1,65 @@
+<header class="page-heading">
+  <div>
+    <h1>Assistant bancaire</h1>
+    <p>Posez vos questions sur les clients et leurs comptes.</p>
+  </div>
+  <span class="badge text-bg-primary">Spring AI · MCP</span>
+</header>
+<div class="card mb-4">
+  <div class="card-body p-4">
+    <form (ngSubmit)="ask()">
+      <label class="form-label" for="query">Votre question</label>
+      <div class="d-flex flex-wrap gap-2">
+        <input
+          class="form-control flex-grow-1 w-auto"
+          id="query"
+          name="query"
+          [(ngModel)]="query"
+          [disabled]="busy()"
+          placeholder="Liste les comptes du client 1"
+          required
+        />
+        <button class="btn btn-primary" type="submit" [disabled]="busy() || !query.trim()">
+          <i class="bi bi-send me-2" aria-hidden="true"></i>Envoyer
+        </button>
+        @if (busy()) {
+          <button class="btn btn-outline-secondary" type="button" (click)="cancel()">
+            Arrêter
+          </button>
+        }
+      </div>
+    </form>
+  </div>
+</div>
+@if (response$ | async; as response) {
+  <div class="mb-3 text-secondary"><strong>Vous :</strong> {{ askedQuery() }}</div>
+  <section class="card" aria-label="Réponse de l'assistant" [attr.aria-busy]="busy()">
+    <div class="card-body p-4">
+      @if (response.type === 'ERROR') {
+        <div class="alert alert-danger mb-0" role="alert">{{ response.errorMessage }}</div>
+      } @else if (response.type === 'SENT') {
+        <p class="text-secondary mb-0" role="status">
+          <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>L'assistant
+          prépare sa réponse…
+        </p>
+      } @else if (response.content) {
+        <div
+          class="chat-response text-break"
+          style="white-space: pre-wrap"
+          [textContent]="response.content"
+        ></div>
+      } @else {
+        <p class="text-secondary mb-0">
+          L'assistant a renvoyé une réponse vide. Reformulez votre question.
+        </p>
+      }
+    </div>
+  </section>
+} @else {
+  <div class="text-center text-secondary py-5">
+    <i class="bi bi-chat-square-text fs-1" aria-hidden="true"></i>
+    <p class="mt-3">
+      Demandez la liste des clients, le solde d'un compte<br />ou la création d'un compte bancaire.
+    </p>
+  </div>
+}
